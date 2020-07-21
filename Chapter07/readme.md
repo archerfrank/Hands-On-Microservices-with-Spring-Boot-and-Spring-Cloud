@@ -1,4 +1,4 @@
-This is an example with Mongo DB and Mysql, it is a synchronized SpringMVC implementation.
+This is an example with Mongo DB and Mysql, it is an asynchronized WebFlux Reactor implementation.
 
 ## Build script
 ```
