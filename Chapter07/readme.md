@@ -1,4 +1,4 @@
-This is an example with Mongo DB and Mysql, it is an asynchronized WebFlux Reactor implementation.
+This is an example with Mongo DB and Mysql and Cloud stream, it is an asynchronized WebFlux Reactor implementation.
 
 ## Build script
 ```
@@ -6,7 +6,8 @@ gradlew.bat build -x test
 docker-compose build
 docker-compose up -d
 docker-compose logs -f
-
+docker-compose down
+docker-compose ps
 ```
 ##  Testing script
 
@@ -51,3 +52,7 @@ Delete a product
 ```
 curl -X DELETE $HOST:$PORT/product-composite/1
 ```
+
+Rabbitmq
+
+http://localhost:15672

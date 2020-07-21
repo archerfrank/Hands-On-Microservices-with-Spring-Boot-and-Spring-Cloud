@@ -3,6 +3,8 @@ buildscript {
 		springBootVersion = '2.1.2.RELEASE'
 	}
 	repositories {
+		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 		mavenCentral()
 	}
 	dependencies {
@@ -23,6 +25,8 @@ version = '1.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+	maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 	mavenCentral()
 }
 
