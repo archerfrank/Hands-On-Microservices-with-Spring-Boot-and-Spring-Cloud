@@ -3,6 +3,8 @@ buildscript {
 		springBootVersion = '2.1.0.RELEASE'
 	}
 	repositories {
+		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 		mavenCentral()
 	}
 	dependencies {
@@ -25,6 +27,8 @@ ext {
 }
 
 repositories {
+	maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 	mavenCentral()
 	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
@@ -34,14 +38,6 @@ dependencies {
 	implementation project(':util')
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.boot:spring-boot-starter-webflux')
-	implementation("io.springfox:springfox-swagger2:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-swagger-ui:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-swagger-common:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-spring-webflux:${springfoxVersion}-31")
-	implementation("io.springfox:springfox-spi:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-core:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-schema:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-spring-web:${springfoxVersion}-38")
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('io.projectreactor:reactor-test')
 }

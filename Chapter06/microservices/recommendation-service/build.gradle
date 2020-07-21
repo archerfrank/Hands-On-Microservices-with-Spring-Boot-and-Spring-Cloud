@@ -3,6 +3,8 @@ buildscript {
 		springBootVersion = '2.1.0.RELEASE'
 	}
 	repositories {
+		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 		mavenCentral()
 	}
 	dependencies {
@@ -24,6 +26,8 @@ ext {
 }
 
 repositories {
+	maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 	mavenCentral()
 	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
