@@ -1,6 +1,6 @@
 server.port: 7002
 
-spring.application.name: recommendation
+spring.application.name: recommendation1
 
 eureka:
   client:
