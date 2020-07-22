@@ -2,6 +2,10 @@ This is an example with Mongo DB and Mysql and Cloud stream, it is an asynchroni
 
 ## Build script
 ```
+SET COMPOSE_FILE=docker-compose.yml
+SET COMPOSE_FILE=docker-compose-partitions.yml
+SET COMPOSE_FILE=docker-compose-kafka.yml
+
 gradlew.bat build -x test
 docker-compose build
 docker-compose up -d
