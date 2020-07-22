@@ -22,11 +22,24 @@ docker-compose up -d
 docker-compose logs -f
 docker-compose down
 docker-compose ps
+
+docker-compose up -d --scale review=3
+docker-compose up -d --scale review=2
+docker-compose up -d --scale review=2 --scale eureka=0
+docker-compose up -d --scale review=1 --scale eureka=0
+docker-compose up -d --scale review=1 --scale eureka=0 --scale product=2
+docker-compose up -d --scale review=1 --scale eureka=1 --scale product=2
 ```
 ##  Testing script
+Eureka Server
+http://localhost:8761/
+curl -H "accept:application/json" http://localhost:8761/eureka/apps
+
 
 Create one product
 ```
+curl -X POST http://localhost:8080/product-composite -H "Content-Type: application/json" -d @data.json
+
 http://localhost:8080/product-composite/
 
 Host: localhost:8080
@@ -61,10 +74,13 @@ View a product
 
 http://localhost:8080/product-composite/2
 
+curl localhost:8080/product-composite/2 -s
+curl localhost:8080/product-composite/1
+
 
 Delete a product
 ```
-curl -X DELETE $HOST:$PORT/product-composite/1
+curl -X DELETE localhost:8080/product-composite/1
 ```
 
 Rabbitmq
