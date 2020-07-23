@@ -11,6 +11,10 @@ The eureka server is added. Please look at the product composite project.
 ```
 This is an example with Mongo DB and Mysql and Cloud stream, it is an asynchronized WebFlux Reactor implementation.
 
+But I change **getCompositeProduct** back to SpringMVC, not async any more.
+
+Change to tomcat container then we can use SpringMVC and webflux, but we can't use SpringMVC if we use netty.
+
 ## Build script
 ```
 SET COMPOSE_FILE=docker-compose.yml
@@ -20,7 +24,7 @@ SET COMPOSE_FILE=docker-compose-kafka.yml
 gradlew.bat build -x test
 docker-compose build
 docker-compose up -d
-docker-compose logs -f
+docker-compose logs -f --tail=0 gateway
 docker-compose down
 docker-compose ps
 
@@ -32,7 +36,26 @@ docker-compose up -d --scale review=1 --scale eureka=0 --scale product=2
 docker-compose up -d --scale review=1 --scale eureka=1 --scale product=2
 ```
 ##  Testing script
+Gateway call
+```
+curl localhost:8080/actuator/gateway/routes -s | jq '.[] | {"\(.route_id)": "\(.route_definition.predicates[0].args._genkey_0)"}'
+```
+
+Some more testing
+
+```
+curl http://localhost:8080/actuator/health
+
+curl http://localhost:8080/headerrouting -H "Host: i.feel.lucky:8080"
+
+curl http://localhost:8080/headerrouting -H "Host: im.a.teapot:8080"
+
+curl http://localhost:8080/headerrouting
+
+```
+
 Eureka Server
+http://localhost:8080/eureka/web
 http://localhost:8761/
 curl -H "accept:application/json" http://localhost:8761/eureka/apps
 
@@ -74,10 +97,11 @@ Content-Length: 610
 View a product
 
 http://localhost:8080/product-composite/2
-
+```
 curl localhost:8080/product-composite/2 -s
 curl localhost:8080/product-composite/1
-
+curl http://localhost:8080/product-composite/2
+```
 
 Delete a product
 ```

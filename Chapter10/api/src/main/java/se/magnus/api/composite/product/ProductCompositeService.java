@@ -32,7 +32,7 @@ public interface ProductCompositeService {
     @GetMapping(
         value    = "/product-composite/{productId}",
         produces = "application/json")
-    Mono<ProductAggregate> getCompositeProduct(@PathVariable int productId);
+    ProductAggregate getCompositeProduct(@PathVariable int productId);
 
 
     /**
