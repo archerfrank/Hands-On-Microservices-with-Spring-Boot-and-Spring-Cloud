@@ -152,7 +152,7 @@ http://localhost:15672
 
 ## Use Open ID Auth
 
-1. Open the URL, https://auth0.com, in your browser.
+1. Open the URL, https://auth0.com, in your browser. I used github to login.
 
 2. Click on the SIGN UP button: 
 
