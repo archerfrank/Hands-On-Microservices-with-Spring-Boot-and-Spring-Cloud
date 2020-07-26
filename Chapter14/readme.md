@@ -40,9 +40,9 @@ curl product-composite:8080/actuator/retryevents
 ##  Testing script
 
 ### Testing
-http://localhost:9411/zipkin/
+http://localhost:9411/zipkin/   -- zipkin UI
 https://localhost:8443/eureka/web 
-http://localhost:15672/#/queues/%2F/zipkin
+http://localhost:15672/#/queues/%2F/zipkin -- rabbit queue management console
 
 curl -k https://writer:secret@localhost:8443/oauth/token -d grant_type=password -d username=magnus -d password=password
 
