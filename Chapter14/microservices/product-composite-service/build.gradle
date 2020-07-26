@@ -3,7 +3,9 @@ buildscript {
 		springBootVersion = '2.1.4.RELEASE'
 	}
 	repositories {
-		mavenCentral()
+		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+	mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -27,6 +29,8 @@ ext {
 }
 
 repositories {
+	maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 	mavenCentral()
 	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
@@ -47,14 +51,6 @@ dependencies {
 	implementation('org.springframework.cloud:spring-cloud-starter-sleuth')
 	implementation('org.springframework.cloud:spring-cloud-starter-zipkin')
 	implementation('org.springframework.retry:spring-retry')
-	implementation("io.springfox:springfox-swagger2:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-swagger-ui:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-swagger-common:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-spring-webflux:${springfoxVersion}-31")
-	implementation("io.springfox:springfox-spi:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-core:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-schema:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-spring-web:${springfoxVersion}-38")
 	implementation("io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}")
 	implementation("io.github.resilience4j:resilience4j-reactor:${resilience4jVersion}")
 
