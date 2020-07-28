@@ -2,7 +2,7 @@ Kubernete
 
 
 ## API 
-
+virtualbox only can share C:/User folder to docker compose. Use it to map the volume.
 ## Executed script
 minikube ip
 gradlew.bat build -x test
