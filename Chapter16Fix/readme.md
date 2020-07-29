@@ -49,6 +49,59 @@ kubectl describe cm config-repo
 
 kubectl run -i --rm --restart=Never curl-client --image=tutum/curl:alpine --command --curl 'http://product-composite:80/1'
 
+## Go to production
+
+1. Resource managers should run outside of the Kubernetes cluster: It is technically feasible to run databases and queue managers for production use on Kubernetes as stateful containers using StatefulSets and PersistentVolumes. At the time of writing this chapter, I recommend against it, mainly because the support for stateful containers is relatively new and unproven in Kubernetes. Instead, I recommend using the existing database and queue manager services on premises or managed services in the cloud, leaving Kubernetes to do what it is best for, that is, running stateless containers. For the scope of this book, to simulate a production environment, we will run MySQL, MongoDB, and RabbitMQ as plain Docker containers outside of Kubernetes using the already existing Docker Compose files.
+2. Lockdown:
+For security reasons, things like actuator endpoints and log levels need to be constrained in a production environment.
+Externally exposed endpoints should also be reviewed from a security perspective. For example, access to the configuration server should most probably be locked down in a production environment, but we will keep it exposed in this book for convenience.
+Docker image tags must be specified to be able to track which versions of the microservices have been deployed.
+
+```
+eval $(minikube docker-env)
+docker-compose up -d mongodb mysql rabbitmq
+
+docker tag hands-on/auth-server hands-on/auth-server:v1
+docker tag hands-on/config-server hands-on/config-server:v1
+docker tag hands-on/gateway hands-on/gateway:v1 
+docker tag hands-on/product-composite-service hands-on/product-composite-service:v1 
+docker tag hands-on/product-service hands-on/product-service:v1
+docker tag hands-on/recommendation-service hands-on/recommendation-service:v1
+docker tag hands-on/review-service hands-on/review-service:v1
+
+kubectl create namespace hands-on
+kubectl config set-context $(kubectl config current-context) --namespace=hands-on
+
+kubectl create configmap config-repo --from-file=config-repo/ --save-config
+
+kubectl create secret generic config-server-secrets \
+  --from-literal=ENCRYPT_KEY=my-very-secure-encrypt-key \
+  --from-literal=SPRING_SECURITY_USER_NAME=prod-usr \
+  --from-literal=SPRING_SECURITY_USER_PASSWORD=prod-pwd \
+  --save-config
+
+kubectl create secret generic config-client-credentials \
+--from-literal=CONFIG_SERVER_USR=prod-usr \
+--from-literal=CONFIG_SERVER_PWD=prod-pwd --save-config
+
+
+history -c; history -w
+
+kubectl apply -k kubernetes/services/overlays/prod
+```
+## Rolling update
+
+```
+kubectl get pod -l app=product -o jsonpath='{.items[*].spec.containers[*].image} '
+
+docker tag hands-on/product-service:v1 hands-on/product-service:v2
+
+kubectl get pod -l app=product -w
+
+failed rolling
+kubectl set image deployment/product pro=hands-on/product-service:v3
+```
+
 ## Build script
 ```
 SET COMPOSE_FILE=docker-compose.yml
