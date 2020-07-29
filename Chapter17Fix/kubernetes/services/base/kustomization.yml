@@ -3,6 +3,4 @@ resources:
 - product-composite.yml
 - product.yml
 - recommendation.yml
-- review.yml
-- zipkin-server.yml
 - ingress-edge-server.yml

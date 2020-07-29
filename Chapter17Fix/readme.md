@@ -1,5 +1,8 @@
 Kubernete
 
+Replacing Spring Cloud Config Server with Kubernetes config maps and secrets
+Replacing Spring Cloud Gateway with a Kubernetes ingress resource
+Deploying and testing the microservice landscape using Docker Compose to ensure that the source code in the microservices isn't locked into Kubernetes
 
 ## API 
 virtualbox only can share C:/User folder to docker compose. Use it to map the volume.

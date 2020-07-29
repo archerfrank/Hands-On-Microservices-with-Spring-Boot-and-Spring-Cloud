@@ -19,7 +19,7 @@ spring.cloud.gateway.routes:
   predicates:
   - Path=/oauth/**
 
-spring.security.oauth2.resourceserver.jwt.jwk-set-uri: http://${app.auth-server}/.well-known/jwks.json
+#spring.security.oauth2.resourceserver.jwt.jwk-set-uri: http://${app.auth-server}/.well-known/jwks.json
 
 logging:
   level:

@@ -1,9 +1,11 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.6.RELEASE'
+		springBootVersion = '2.1.4.RELEASE'
 	}
 	repositories {
-		mavenCentral()
+			maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+	mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -20,13 +22,15 @@ version = '1.0.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 ext {
-	springCloudVersion = "Greenwich.SR2"
+	springCloudVersion = "Greenwich.SR1"
 //	springfoxVersion = "3.0.0-SNAPSHOT"
 	springfoxVersion = "3.0.0-20190808.104142"
 	resilience4jVersion = "0.14.1"
 }
 
 repositories {
+		maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		maven{ url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 	mavenCentral()
 	maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
@@ -36,23 +40,11 @@ dependencies {
 	implementation project(':util')
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.boot:spring-boot-starter-webflux')
-	implementation('org.springframework.boot:spring-boot-starter-security')
-	implementation('org.springframework.security:spring-security-oauth2-resource-server')
-	implementation('org.springframework.security:spring-security-oauth2-jose')
 
 	implementation('org.springframework.cloud:spring-cloud-starter-stream-rabbit')
 	implementation('org.springframework.cloud:spring-cloud-starter-stream-kafka')
-	implementation('org.springframework.cloud:spring-cloud-starter-sleuth')
-	implementation('org.springframework.cloud:spring-cloud-starter-zipkin')
+	implementation('org.springframework.cloud:spring-cloud-starter-config')
 	implementation('org.springframework.retry:spring-retry')
-	implementation("io.springfox:springfox-swagger2:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-swagger-ui:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-swagger-common:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-spring-webflux:${springfoxVersion}-31")
-	implementation("io.springfox:springfox-spi:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-core:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-schema:${springfoxVersion}-39")
-	implementation("io.springfox:springfox-spring-web:${springfoxVersion}-38")
 	implementation("io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}")
 	implementation("io.github.resilience4j:resilience4j-reactor:${resilience4jVersion}")
 
