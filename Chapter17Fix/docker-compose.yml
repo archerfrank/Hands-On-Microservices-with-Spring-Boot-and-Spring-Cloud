@@ -67,7 +67,7 @@ services:
         condition: service_healthy
 
   product-composite:
-    build: microservices/product-composite-service
+    build: microservices/pcs
     image: hands-on/product-composite-service
     mem_limit: 350m
     networks:

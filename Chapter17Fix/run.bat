@@ -33,8 +33,13 @@ kubectl create secret generic mysql-credentials     --from-literal=SPRING_DATASO
 
 kubectl create secret tls tls-certificate --key kubernetes/cert/tls.key --cert kubernetes/cert/tls.crt
 
+kubectl describe cm config-repo
+
+@FOR /f "tokens=*" %i IN ('minikube -p handson-spring-boot-cloud docker-env') DO @%i
+
 docker pull mongo:3.6.9
 docker pull rabbitmq:3.7.26-management-alpine
+docker tag hands-on/product-composite-service hands-on/product-composite-service:v1 
 
 kubectl apply -k kubernetes/services/overlays/dev
 kubectl wait --timeout=900s --for=condition=ready pod --all

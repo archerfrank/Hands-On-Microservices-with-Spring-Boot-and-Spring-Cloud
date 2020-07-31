@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: comp
-        image: hands-on/product-composite-service
+        image: hands-on/product-composite-service:v1
         imagePullPolicy: Never
         env:
         - name: SPRING_PROFILES_ACTIVE
@@ -62,8 +62,10 @@ kind: Service
 metadata:
   name: product-composite
 spec:
+  type: NodePort
   selector:
     app: product-composite
   ports:
     - port: 80
       targetPort: 80
+      nodePort: 30080

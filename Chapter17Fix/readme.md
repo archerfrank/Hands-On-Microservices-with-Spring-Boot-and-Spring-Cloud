@@ -1,5 +1,5 @@
 Kubernete
-
+Ingress doesn't work in my PC, use NodePort instead.
 Replacing Spring Cloud Config Server with Kubernetes config maps and secrets
 Replacing Spring Cloud Gateway with a Kubernetes ingress resource
 Deploying and testing the microservice landscape using Docker Compose to ensure that the source code in the microservices isn't locked into Kubernetes
@@ -36,19 +36,26 @@ kubectl wait --timeout=900s --for=condition=ready pod --all
 
 kubectl get pods -o json | jq .items[].spec.containers[].image
 
-kubectl logs -f gateway-66648bcc85-w9jkw 
+kubectl logs -f product-composite-777567f846-hks8t
 
-https://192.168.99.105:31443/actuator/health
+https://192.168.99.105:30080/actuator/health
 https://192.168.99.105:18443/actuator/health
 
-curl -k https://192.168.99.105:31443/product-composite/1 
+curl -k http://minikube.me:30080/product-composite/1 
+curl -k http://minikube.me:30080/actuator/health
+curl -k http://minikube.me:30080/product-composite/1 
 
-curl -k -i -X POST https://192.168.99.105:31443/product-composite -d @data.json -H "Content-Type: application/json" 
+curl -k -i -X POST http://minikube.me:30080/product-composite -d @data.json -H "Content-Type: application/json" 
 
 kubectl delete namespace hands-on
 
 kubectl get configmap config-repo
 kubectl describe cm config-repo
+
+kubectl exec -it podName  -c  containerName -n namespace -- shell comand
+
+
+kubectl exec -it product-composite-f5dfb9c65-lxj56  -c  k8s_comp_product-composite-f5dfb9c65-lxj56_hands-on_75276020-d142-4904-b672-e35c2b9137b0_0 -- curl 'http://product-composite:80/1'
 
 kubectl run -i --rm --restart=Never curl-client --image=tutum/curl:alpine --command --curl 'http://product-composite:80/1'
 

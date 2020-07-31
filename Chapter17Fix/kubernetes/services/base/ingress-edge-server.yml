@@ -3,18 +3,10 @@ kind: Ingress
 metadata:
   name: edge
 spec:
-  tls:
-    - hosts:
-      - minikube.me
-      secretName: tls-certificate
   rules:
   - host: minikube.me
     http:
       paths:
-      - path: /oauth
-        backend:
-          serviceName: auth-server
-          servicePort: 80
       - path: /product-composite
         backend:
           serviceName: product-composite
@@ -22,4 +14,8 @@ spec:
       - path: /actuator/health
         backend:
           serviceName: product-composite
+          servicePort: 80
+      - path: /
+        backend:
+          serviceName: nginx-service
           servicePort: 80
