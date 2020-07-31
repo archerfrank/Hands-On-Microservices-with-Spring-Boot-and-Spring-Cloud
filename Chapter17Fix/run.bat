@@ -43,3 +43,12 @@ docker tag hands-on/product-composite-service hands-on/product-composite-service
 
 kubectl apply -k kubernetes/services/overlays/dev
 kubectl wait --timeout=900s --for=condition=ready pod --all
+
+REM add minikube in window/driver/etc
+curl -k http://minikube.me:30080/product-composite/1 
+curl -k http://minikube.me:30080/actuator/health
+curl -k http://minikube.me:30080/product-composite/1 
+curl -k -i -X POST http://minikube.me:30080/product-composite -d @data.json -H "Content-Type: application/json" 
+
+kubectl delete namespace hands-on
+minikube stop
