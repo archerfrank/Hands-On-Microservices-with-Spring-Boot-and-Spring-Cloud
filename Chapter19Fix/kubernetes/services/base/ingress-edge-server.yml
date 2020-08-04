@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: edge
+spec:
+  rules:
+  - host: minikube.me
+    http:
+      paths:
+      - path: /product-composite
+        backend:
+          serviceName: product-composite
+          servicePort: 80        
+      - path: /actuator/health
+        backend:
+          serviceName: product-composite
+          servicePort: 80
+      - path: /
+        backend:
+          serviceName: nginx-service
+          servicePort: 80

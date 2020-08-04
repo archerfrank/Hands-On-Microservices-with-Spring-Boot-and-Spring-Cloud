@@ -1,0 +1,4 @@
+resources:
+- product-composite.yml
+- product.yml
+- recommendation.yml
